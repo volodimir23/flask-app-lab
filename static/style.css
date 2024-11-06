@@ -1,0 +1,19 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.footer-container {
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.footer-container a {
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
