@@ -1,12 +1,52 @@
 {% extends "base.html" %}
+
+{% block title %}
+    Articles
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/posts.css') }}">
+{% endblock %}
 {% block content %}
-    <h1>Articles</h1>
-    <ul>
-    {% for post in posts %}
-      <li>
-            {{ post["id"] }}
-            <a href="{{ url_for('posts.get_post', id=post['id'] ) }}">{{ post["title"] }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+
+    <div class="container">
+        <h1 class="myclass">Articles</h1>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" height="150"
+                             src="{{ url_for('.static', filename='img/default.png') }}" alt="">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">id: {{ post.id }}</small>
+                                <p class="card-text"><small class="text-muted">Category: {{ post.category }}</small></p>
+                            </div>
+
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content | truncate(23) }}</p>
+                            <a href="{{ url_for('posts.get_post', id=post.id) }}" class="btn btn-outline-primary">View
+                                Post</a>
+                        </div>
+                        <div class="card-footer d-flex">
+                            {% if post.is_active %}
+                                <span class="badge badge-success">Active</span>
+                            {% else %}
+                                <span class="badge badge-secondary">Inactive</span>
+                            {% endif %}
+                            <div class="card-text ms-auto">
+                                <small class="text-muted">Published: {{ post.publication_date }}</small>
+                                <small class="text-muted">Author: {{ post.author }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row mt-3">
+                <form action="{{ url_for('.add_post') }}">
+                    <button type="submit" class="btn btn-primary">Add post</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

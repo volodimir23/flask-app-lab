@@ -24,3 +24,11 @@ html {
     right: 20px;
     z-index: 1050;
 }
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+}
